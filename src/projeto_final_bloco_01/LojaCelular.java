@@ -1,6 +1,7 @@
 package projeto_final_bloco_01;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import model.Acessorios;
 import model.Produto;
@@ -26,6 +27,15 @@ public class LojaCelular {
             System.out.print("Entre com a opção desejada: ");
             opcao = leia.nextInt();
 
+            try {
+				opcao = leia.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("\nDigite valores inteiros!");
+				leia.nextLine();
+				opcao = 0;
+			}
+            
+            
             if (opcao == 5) {
                 System.out.println("\nFechando o terminal de produtos!");
                 leia.close();
@@ -120,8 +130,11 @@ public class LojaCelular {
         leia.close();
     }
 
-    public static void keyPress() {
+    public static void keyPress() 
+    
+    {
         Scanner scanner = new Scanner(System.in);
+        
         System.out.println("\nPressione Enter para continuar...");
         scanner.nextLine();
     }
