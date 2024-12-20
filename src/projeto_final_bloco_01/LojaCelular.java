@@ -1,10 +1,11 @@
 package projeto_final_bloco_01;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 import model.Acessorios;
-import model.Produto;
 
 public class LojaCelular {
 
@@ -12,9 +13,9 @@ public class LojaCelular {
 
         ArrayList<Acessorios> listaAcessorios = new ArrayList<>();
         Scanner leia = new Scanner(System.in);
-        int opcao;
+        int opcao = 0;
 
-        do {
+        while (true){
             System.out.println("*****************************************************");
             System.out.println("           Estoque Celular e Acessórios            ");
             System.out.println("*****************************************************");
@@ -25,8 +26,8 @@ public class LojaCelular {
             System.out.println("            5 - Sair                                ");
             System.out.println("*****************************************************");
             System.out.print("Entre com a opção desejada: ");
-            opcao = leia.nextInt();
 
+            
             try {
 				opcao = leia.nextInt();
 			} catch (InputMismatchException e) {
@@ -34,10 +35,10 @@ public class LojaCelular {
 				leia.nextLine();
 				opcao = 0;
 			}
-            
-            
+
             if (opcao == 5) {
                 System.out.println("\nFechando o terminal de produtos!");
+                sobre();
                 leia.close();
                 System.exit(0);
             }
@@ -47,14 +48,14 @@ public class LojaCelular {
                     System.out.println("\nOpção 1 selecionada: Cadastrar Produto.");
                     System.out.println("Digite o Código do Produto: ");
                     int codigo = leia.nextInt();
-                    
+
                     System.out.println("Digite o Nome do Produto: ");
-                    leia.nextLine();
-                    
+                    leia.nextLine(); 
+
                     String acessorio = leia.nextLine();
                     System.out.println("Digite a Quantidade para estoque ");
                     int quantidade = leia.nextInt();
-                    
+
                     Acessorios novoProduto = new Acessorios(quantidade, codigo, acessorio);
                     listaAcessorios.add(novoProduto);
                     System.out.println("\nProduto " + acessorio + " cadastrado com sucesso!");
@@ -75,11 +76,11 @@ public class LojaCelular {
 
                 case 3:
                     System.out.println("\nOpção 3 selecionada: Atualizar Estoque.");
-                    
+
                     System.out.println("Digite o código do produto a ser atualizado: ");
                     int codigoAtualizacao = leia.nextInt();
                     Acessorios produtoAtualizado = null;
-                    
+
                     for (Acessorios x : listaAcessorios) {
                         if (x.getCodigo() == codigoAtualizacao) {
                             produtoAtualizado = x;
@@ -102,7 +103,7 @@ public class LojaCelular {
                     System.out.println("\nOpção 4 selecionada: Excluir Produto.");
                     System.out.println("Digite o código do produto a ser excluído: ");
                     int codigoExclusao = leia.nextInt();
-                    
+
                     Acessorios produtoExcluir = null;
                     for (Acessorios a : listaAcessorios) {
                         if (a.getCodigo() == codigoExclusao) {
@@ -121,21 +122,26 @@ public class LojaCelular {
                     break;
 
                 default:
-                    System.out.println("Opção inválida. Por favor, tente novamente.");
+                    System.out.println("\nOpção inválida. Por favor, tente novamente.");
                     keyPress();
                     break;
             }
-        } while (opcao != 5);
-
-        leia.close();
+        }
+    }
+        public static void sobre() {
+    		System.out.println("\n*********************************************************");
+    		System.out.println("Projeto Desenvolvido por: Henrique da Silva");
+    		System.out.println("https://www.linkedin.com/in/henriquesilvaaa/");
+    		System.out.println("https://github.com/HenriqueAndras1");
+    		System.out.println("*********************************************************");
     }
 
-    public static void keyPress() 
-    
-    {
-        Scanner scanner = new Scanner(System.in);
-        
-        System.out.println("\nPressione Enter para continuar...");
-        scanner.nextLine();
+    public static void keyPress() {
+        try {
+            System.out.println("\n\nPressione Enter para Continuar...");
+            System.in.read();
+        } catch (IOException e) {
+            System.out.println("Você pressionou uma tecla diferente de enter!");
+        }
     }
 }

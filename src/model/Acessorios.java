@@ -11,7 +11,7 @@ public class Acessorios extends Produto{
     public void visualizar() {
         System.out.println("\nDetalhes dos Produtos:");
         System.out.println("Código: " + getCodigo());
-        System.out.println("Quantidade em Estoque " + getQuantidade());
+        System.out.println("Quantidade em Estoque: " + getQuantidade() + " unidades");
         System.out.println("Produto - " + getAcessorio());
     }
 }
